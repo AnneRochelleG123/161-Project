@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add a Recipe</h1>
+<form action="{{ url_for('update') }}" method="post">
+    <input type="hidden" name="recipe_id" value="{{ recipe.recipe_id }}">
+    <label for="r_type">Type:</label>
+    <select name="recipe_type" id="r_type" required>
+        <option disabled selected value>...</option>
+        {% if recipe.recipe_type == "cookies" %}
+        <option value="cookies" selected>Cookie</option>
+        <option value="cakes">Cake</option>
+        <option value="breads">Bread</option>
+        {% elif recipe.recipe_type == "cakes" %}
+        <option value="cookies">Cookie</option>
+        <option value="cakes" selected>Cake</option>
+        <option value="breads">Bread</option>
+        {% elif recipe.recipe_type == "breads" %}
+        <option value="cookies">Cookie</option>
+        <option value="cakes">Cake</option>
+        <option value="breads" selected>Bread</option>
+        {% endif %}
+    </select><br><br>
+    <label for="r_name">Name:</label>
+    <input type="text" name="recipe_name" id="r_name" value="{{ recipe.name }}" required><br><br>
+    <label for="r_time">Time:</label>
+    <input type="text" name="recipe_time" id="r_time" value="{{ recipe.time }}"><br><br>
+    <label for="r_url">Image URL:</label>
+    <input type="url" name="recipe_url" id="r_url" value="{{ recipe.url }}"><br>
+    <label for="r_source">Source:</label>
+    <input type="url" name="recipe_source" id="r_source" value="{{ recipe.source }}"><br>
+    <textarea name="recipe_desc" cols="30" rows="10">{{ recipe.description }}</textarea><br>
+    <input type="submit" value="Update!">
+</form>
+{% endblock %}
