@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ recipe.name }}</h1>
+
+<section class="webpage">
+<img src="{{recipe.url}}">
+</section>
+
+<h3>{{ recipe.description }}</h3>
+<ul>
+    <li>Type: {{ recipe.recipe_type }}</li>
+    <li>Time: {{ recipe.time }}</li>
+    <li>Source: <a href="{{recipe.source}}" target="_blank">{{recipe.source}}</a></li>
+</ul>
+
+
+<form action="{{ url_for('modify') }}" method="post">
+    <input type="hidden" name="recipe_id" value="{{ recipe.recipe_id }}">
+    <input class="btn btn-secondary" type="submit" name="modify" value="edit"></input>
+    <input class="btn btn-danger" type="submit" name="modify" value="delete"></input>
+</form>
+{% endblock %}
